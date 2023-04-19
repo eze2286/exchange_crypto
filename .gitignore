@@ -2,3 +2,4 @@
 /exchange-venv
 /exchange.db
 /requirements.txt
+/queries.py
