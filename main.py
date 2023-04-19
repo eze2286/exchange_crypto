@@ -2,7 +2,9 @@ from fastapi import FastAPI
 import pandas as pd
 from schemas import Compra, Venta, Saldo
 from datetime import date
-from queries import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond
+#from queries import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond
+from test_mysql import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond, select_valued_possesion
+
 from external_data import close_price
 
 cierre = float(close_price)
@@ -19,6 +21,12 @@ def cierre_diario():
 def saldo():
     saldo = select_saldo_exchange()
     return {"Su saldo actual es ": str(saldo)}
+###########################
+@app.get("/tenencia_valorizada")
+def tenencia():
+    tenencia = select_valued_possesion()
+    return {"Tenencia actual  ":f"{str(tenencia[0])} unidades",
+            "Tenencia actual valorizada ":f"{str(tenencia[1])}"}
 ###########################
 @app.post("/saldo")
 def add_saldo(saldo:Saldo):
@@ -49,6 +57,10 @@ def venta(venta:Venta):
     monto_venta = float(venta.cantidad * cierre)
     ajuste_saldo = add_saldo_database(monto_venta)
     
+    print(monto_venta)
+    print(precio_compra_ponderado)
+    print(venta.cantidad)
+    print(precio_compra_ponderado * venta.cantidad)
     resultado = monto_venta - (precio_compra_ponderado * venta.cantidad)
     return {"Se realizó la siguiente venta":venta, "El resultado de la misma fue U$S ":resultado}
 ####################################
