@@ -3,7 +3,7 @@ import pandas as pd
 from schemas import Compra, Venta, Saldo
 from datetime import date
 #from queries import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond
-from test_mysql import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond, select_valued_possesion
+from conecction_db import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond, select_valued_possesion
 
 from external_data import close_price
 
