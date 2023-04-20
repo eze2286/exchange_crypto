@@ -10,7 +10,9 @@ def get_connection_to_data_base():
     conn=pymysql.connect(
     host = 'exchange-db.cjgfmaah7lau.us-east-1.rds.amazonaws.com',
     user =  'admin',
-    password = os.getenv('dbpassword'))
+    # password = os.getenv('dbpassword')
+    password = "veron3841")
+    
     return conn
 
 def add_saldo_database(saldo_exchange:Union[Saldo, float]):
@@ -106,6 +108,8 @@ def select_price_quantity_pond():
 
 def select_valued_possesion():
     cantidad_comprada = select_quantity_cripto()
+    if not cantidad_comprada:
+        return None
     con_db = get_connection_to_data_base()
     cursor = con_db.cursor()
     sql_use = """USE exchange"""
@@ -114,11 +118,25 @@ def select_valued_possesion():
         SELECT SUM(cantidad) FROM ventas WHERE date <= %s
     """, (datetime.now(),))
     cantidad_vendida = cursor.fetchall()[0][0] 
-    con_db.close()
-    tenencia_cantidad = cantidad_comprada - cantidad_vendida
+    con_db.close()    
+    if not cantidad_vendida:
+        tenencia_cantidad = cantidad_comprada
+    else:
+        tenencia_cantidad = cantidad_comprada - cantidad_vendida
     tenencia_valorizada = tenencia_cantidad * close_price
     return tenencia_cantidad, tenencia_valorizada
 
+def delete_registers_on_tables():
+    con_db = get_connection_to_data_base()
+    cursor = con_db.cursor()
+    sql_use = """USE exchange"""
+    cursor.execute(sql_use)
+    cursor.execute("DELETE FROM saldo_exchange")
+    cursor.execute("DELETE FROM compras")
+    cursor.execute("DELETE FROM ventas")
+    con_db.commit()
+    con_db.close()
+    return "Se ha reseteado correctamente toda la informacion de la billetera"  
 # test = select_valued_possesion()
 # print(test)
 

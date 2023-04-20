@@ -3,7 +3,7 @@ import pandas as pd
 from schemas import Compra, Venta, Saldo
 from datetime import date
 #from queries import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond
-from conecction_db import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond, select_valued_possesion
+from conecction_db import add_compras_database, select_purchase_cripto, select_quantity_cripto,add_sales_database, add_saldo_database, select_saldo_exchange, select_price_quantity_pond, select_valued_possesion, delete_registers_on_tables
 
 from external_data import close_price
 
@@ -20,11 +20,15 @@ def cierre_diario():
 @app.get("/saldo")
 def saldo():
     saldo = select_saldo_exchange()
-    return {"Su saldo actual es ": str(saldo)}
+    if not saldo:
+        saldo = 0
+    return {"Su saldo actual es U$D": str(saldo)}
 ###########################
 @app.get("/tenencia_valorizada")
 def tenencia():
     tenencia = select_valued_possesion()
+    if not tenencia:
+        return {"No es posible realizar la transacción": "No registra tenencias a la fecha"}
     return {"Tenencia actual  ":f"{str(tenencia[0])} unidades",
             "Tenencia actual valorizada ":f"{str(tenencia[1])}"}
 ###########################
@@ -62,5 +66,14 @@ def venta(venta:Venta):
     print(venta.cantidad)
     print(precio_compra_ponderado * venta.cantidad)
     resultado = monto_venta - (precio_compra_ponderado * venta.cantidad)
-    return {"Se realizó la siguiente venta":venta, "El resultado de la misma fue U$S ":resultado}
+    return {"Se realizó la siguiente venta":venta,
+            "El precio unitario de venta fue de U$S":cierre,
+            "El precio promedio ponderado unitario de compra fue de U$S":precio_compra_ponderado,  
+            "El resultado de la misma fue U$S":resultado}
 ####################################
+@app.delete("/reset_wallet")
+def reset_wallet():
+    reset = delete_registers_on_tables()
+    return {"Operacion realizada satisfactoriamente: ": reset}
+####################################
+
