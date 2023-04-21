@@ -1,7 +1,7 @@
-from schemas import Compra, Venta, Saldo
+from routers.schemas import Compra, Venta, Saldo
 from datetime import date, datetime
 #from database import get_connection_to_data_base
-from external_data import close_price
+from routers.external_data import close_price
 from typing import Union
 import pymysql
 import os
