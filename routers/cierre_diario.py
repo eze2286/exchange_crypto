@@ -1,13 +1,20 @@
 
 from fastapi import APIRouter
+from fastapi import HTTPException
+from fastapi import status
+from fastapi.responses import JSONResponse
 from routers.external_data import close_price
 
 
-
 router = APIRouter()
-cierre = float(close_price)
-
-
-@router.get("/cierre_diario")
+@router.get("/cierre_diario",
+            status_code=status.HTTP_200_OK,
+            summary="Obtención del precio actual de la cripto", 
+            tags=["Precio y Saldos"])
 async def cierre_diario():
-    return cierre
+    try:
+        cierre = float(close_price)
+        return JSONResponse({"El precio actual es de U$S":cierre})
+    except:
+        HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
+                      detail="No se pudo obtener el precio")

@@ -10,7 +10,7 @@ def get_connection_to_data_base():
     conn=pymysql.connect(
     host = 'exchange-db.cjgfmaah7lau.us-east-1.rds.amazonaws.com',
     user =  'admin',
-    password = os.getenv('dbpassword'))    
+    password = os.getenv('dbpassword'))
     return conn
 
 def add_saldo_database(saldo_exchange:Union[Saldo, float]):
@@ -142,7 +142,7 @@ def delete_registers_on_tables():
 # cursor=conexion.cursor()
 # sql_use = """USE exchange"""
 # cursor.execute(sql_use)
-# sql_query = """SELECT * FROM saldo_exchange"""
+# sql_query = """SELECT * FROM compra"""
 # cursor.execute(sql_query)
 # data = cursor.fetchall()
 # print(data)

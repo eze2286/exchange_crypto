@@ -1,6 +1,7 @@
-from typing import Union, Optional
+from typing import Union, Optional, ClassVar
 from pydantic import BaseModel
 from datetime import date as date_type
+from datetime import datetime 
 
 class SaldoInicial():
     def __init__(self):
@@ -8,14 +9,14 @@ class SaldoInicial():
 
 class Saldo(BaseModel):
     saldo:float
-    date: date_type
+    date: ClassVar[datetime]=datetime.now()
 
 class Compra(BaseModel):
     cantidad: float
     # precio: float
-    date: date_type
+    date: ClassVar[datetime]=datetime.now()
 
 class Venta(BaseModel):
     cantidad: float
     # precio: float
-    date: date_type
+    date: ClassVar[datetime]=datetime.now()

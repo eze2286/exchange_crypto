@@ -3,3 +3,4 @@
 /exchange.db
 /requirements.txt
 /queries.py
+/routers/test.py
