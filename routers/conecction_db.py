@@ -10,8 +10,7 @@ def get_connection_to_data_base():
     conn=pymysql.connect(
     host = 'exchange-db.cjgfmaah7lau.us-east-1.rds.amazonaws.com',
     user =  'admin',
-    # password = os.getenv('dbpassword'))
-    password = "veron3841")    
+    password = os.getenv('dbpassword'))
     return conn
 
 def add_saldo_database(saldo_exchange:Union[Saldo, float]):
