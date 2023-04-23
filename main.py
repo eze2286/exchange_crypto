@@ -19,33 +19,35 @@ async def welcome():
     html_content = """
     <html>
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
             <title>FastAPI Root Endpoint</title>
             <style>
                 h1, p {
                     text-align: center;
+                  	margin-right: 40px;
+                    font-size: 44px;                  	
+                  	font-weight: bold;
                 }
                 
                 .link-container {
                     text-align: center;
+                    font-size: 25px;
+                  	font-weight: bold;
+                    color: blue;
                 }
             </style>
         </head>
-        <body background= "https://i0.wp.com/www.quebakan.com/v15/wp-content/uploads/2022/09/app-peigo.jpg?resize=700%2C904&ssl=1" bgcolor="FFCECB">
+        <body background= "https://movypay.com/wp-content/uploads/2019/10/Fotolia_182043508_Subscription_Monthly_M-1200x675.jpg" bgcolor="FFCECB">
             <h1>Cripto Exchange</h1>
-            <p>Una nueva forma de administrar tu dinero</p>            
-            <p>Para acceder a la documentación de la API, visite:</p>
+            <p style="font-size: 20px;">Una nueva forma de administrar tu dinero</p>            
+            <p style="font-size: 20px;">Para acceder a la documentación de la API, visite:</p>
             <div class="link-container">
-                <a href="https://exchange-nfmb.onrender.com/docs">Documentación de la API</a>
+                <a href="https://exchange-nfmb.onrender.com/docs" style="font-size: 20px;">Documentación de la API</a>
             </div>
         </body>
     </html>
     """
     return html_content
-
-# @app.get("/")
-# async def welcome():
-#     html_content = FileResponse("wallet.jpg")
-#     return html_content
 
 ###########################
 app.include_router(cierre_diario.router)
