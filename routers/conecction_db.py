@@ -1,15 +1,16 @@
 from routers.schemas import Compra, Venta, Saldo
-from datetime import date, datetime
 from routers.external_data import close_price
+from datetime import date, datetime
 from typing import Union
+from setting import HOST, USER
 import pymysql
 import os
 
 def get_connection_to_data_base():
     conn=pymysql.connect(
-    host = 'exchange-db.cjgfmaah7lau.us-east-1.rds.amazonaws.com',
-    user =  'admin',
-    password = os.getenv('dbpassword'))           
+    host = HOST,
+    user =  USER,
+    password = os.getenv('dbpassword'))             
     return conn
 
 def add_saldo_database(saldo_exchange:Union[Saldo, float]):
@@ -78,6 +79,18 @@ def select_quantity_cripto():
     cursor.execute(sql_use)
     cursor.execute("""
         SELECT SUM(cantidad) FROM compras WHERE date <= %s
+    """, (datetime.now(),))
+    cantidad = cursor.fetchall()[0][0]    
+    con_db.close()
+    return cantidad
+
+def select_quantity_cripto_ventas():
+    con_db = get_connection_to_data_base()
+    cursor = con_db.cursor()
+    sql_use = """USE exchange"""
+    cursor.execute(sql_use)
+    cursor.execute("""
+        SELECT SUM(cantidad) FROM ventas WHERE date <= %s
     """, (datetime.now(),))
     cantidad = cursor.fetchall()[0][0]    
     con_db.close()

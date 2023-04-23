@@ -1,7 +1,6 @@
 
 from fastapi import APIRouter
 from fastapi import status
-from fastapi.responses import JSONResponse
 from routers.conecction_db import select_saldo_exchange
 
 
@@ -13,5 +12,8 @@ router = APIRouter()
             tags=["Precio y Saldos"]
             )
 async def saldo():
-    saldo = select_saldo_exchange()   
-    return JSONResponse({"Su saldo actual es U$D": str(saldo)})
+    """Te permite saber tu saldo actual en dolares en la billetera"""
+    saldo = select_saldo_exchange()
+    if not saldo:
+        saldo = 0.0   
+    return {"Su saldo actual es U$D": str(saldo)}
