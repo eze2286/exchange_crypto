@@ -8,6 +8,12 @@ def get_connection_to_data_base():
     )
     return conn
 
+#IMPORTANT
+# Presione Ctrl + Shift + P para abrir la paleta de comandos
+# Vaya a Usuarios.configuración.json
+# Agrega la siguiente línea
+#"terminal.integrated.env.windows": { "PYTHONPATH": "${workspaceFolder}" }
+
 # conexion = get_connection_to_data_base()
 # cursor=conexion.cursor()
 # sql_use = """USE exchange"""

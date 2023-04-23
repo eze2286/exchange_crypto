@@ -12,8 +12,8 @@ app = FastAPI(title="Exchange Cripto",
 # Welcome
 @app.get("/",
           response_class=HTMLResponse,          
-          summary="Welcome",
-          tags=["Welcome"])
+          summary="Bienvenid@s",
+          tags=["Bienvenid@s"])
 
 async def welcome():
     html_content = """
@@ -49,6 +49,7 @@ async def welcome():
     """
     return html_content
 
+#ROUTERS --> se encuentran en el modulo /routers
 ###########################
 app.include_router(cierre_diario.router)
 ###########################
