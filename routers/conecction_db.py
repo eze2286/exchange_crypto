@@ -1,6 +1,5 @@
 from routers.schemas import Compra, Venta, Saldo
 from datetime import date, datetime
-#from database import get_connection_to_data_base
 from routers.external_data import close_price
 from typing import Union
 import pymysql
@@ -10,7 +9,7 @@ def get_connection_to_data_base():
     conn=pymysql.connect(
     host = 'exchange-db.cjgfmaah7lau.us-east-1.rds.amazonaws.com',
     user =  'admin',
-    password = os.getenv('dbpassword'))       
+    password = os.getenv('dbpassword'))           
     return conn
 
 def add_saldo_database(saldo_exchange:Union[Saldo, float]):
