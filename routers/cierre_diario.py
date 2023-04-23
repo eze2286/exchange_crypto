@@ -12,8 +12,9 @@ router = APIRouter()
             summary="Obtención del precio actual de la cripto", 
             tags=["Precio y Saldos"])
 async def cierre_diario():
+    """Obtención del precio actual de la criptomoneda"""
     try:
-        cierre = float(close_price)
+        cierre = round(float(close_price), 3)
         return JSONResponse({"El precio actual es de U$S":cierre})
     except:
         HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 

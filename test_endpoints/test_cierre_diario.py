@@ -11,7 +11,7 @@ def test_close_price():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {"El precio actual es de U$S":cierre}
 
-def test_bad_close_price():
+def test_bad_close_price(): # se genera el error para prueba
     response = client.get("/cierre_diario")
     cierre = float(close_price)
     assert response.status_code == status.HTTP_200_OK

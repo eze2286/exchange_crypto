@@ -18,9 +18,11 @@ async def compra(
                          description="Ingresar la cantidad que desea comprar"                         
                          )
                          ):
+    """Ingresar la cantidad que desea comprar"""
     try:
         cierre = float(close_price)
     except:
+        
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail= "No se pudo obtener el precio actual")
     saldo = select_saldo_exchange()
@@ -28,10 +30,12 @@ async def compra(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail= ("La cantidad comprada debe ser mayor a 0"))    
     monto_compra = float(compra.cantidad * cierre)
-    if monto_compra > float(saldo):
+    if (not saldo) or (monto_compra > float(saldo)):
+        if not saldo:
+            saldo = "0.0"
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE,
                             detail=f"error: Saldo insuficiente, su saldo es {saldo} y el monto de compra es {monto_compra}")        
     add_compra = add_compras_database(compra = compra)
     ajuste_saldo = add_saldo_database(monto_compra * -1.0)
-    return JSONResponse(
-        {"Success operation": f"se realizó la compra de {str(compra.cantidad)} unidades"})
+    return {"Success operation": f"se realizó la compra de {str(compra.cantidad)} unidades"}
+        
