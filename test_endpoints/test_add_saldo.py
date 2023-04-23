@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 from fastapi import status
-from routers.external_data import close_price
 from main import app
 
 client = TestClient(app)

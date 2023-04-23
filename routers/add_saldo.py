@@ -16,6 +16,7 @@ async def add_saldo(
     saldo:Saldo = Body(...,
                        description="Ingresar el saldo a cargar en la billetera")
     ):
+    """Ingresar el saldo a cargar en la billetera"""
     if saldo.saldo == 0:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="El saldo a ingresar debe ser mayor a 0")
