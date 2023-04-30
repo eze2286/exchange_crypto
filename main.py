@@ -37,9 +37,9 @@ async def welcome():
                 }
             </style>
         </head>
-        <body background= "https://movypay.com/wp-content/uploads/2019/10/Fotolia_182043508_Subscription_Monthly_M-1200x675.jpg" bgcolor="FFCECB">
+        <body background= "https://img.freepik.com/vector-gratis/moneda-virtual-bitcoin-billetera-billetes_24877-56101.jpg?w=826&t=st=1682738839~exp=1682739439~hmac=dbc21f8796d939bb963b2dedfbb9e156345f04ddcb69cc16a30cec05778a913d" bgcolor="FFCECB">
             <h1>Cripto Exchange</h1>
-            <p style="font-size: 20px;">Una nueva forma de administrar tu dinero</p>            
+            <p style="font-size: 20px;">Una nueva forma de administrar tu dinero de forma segura</p>            
             <p style="font-size: 20px;">Para acceder a la documentación de la API, visite:</p>
             <div class="link-container">
                 <a href="https://exchange-nfmb.onrender.com/docs" style="font-size: 20px;">Documentación de la API</a>
