@@ -13,7 +13,7 @@ def test_compra():
                                 })    
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json() == {
-                            "Success operation": f"se realizó la compra de 1.0 unidades"
+                            "Success operation": "se realizó la compra de 1.0 unidades"
                             }
 
 def test_saldo_disponible_para_compra():
