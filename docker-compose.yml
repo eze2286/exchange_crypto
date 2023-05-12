@@ -7,3 +7,4 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80-81:80"
+    image: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
