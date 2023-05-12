@@ -30,6 +30,8 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: exchange
         IMAGE_TAG: exchange_fasapi_image
-       run: |             
+
+       run: |       
+
         docker-compose up -d
         docker-compose push
