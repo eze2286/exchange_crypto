@@ -31,8 +31,8 @@ jobs:
         ECR_REPOSITORY: exchange
         IMAGE_TAG: exchange_fasapi_image
        run: |
-        echo ECR_REGISTRY >> $GITHUB_ENV
-        echo ECR_REPOSITORY >> $GITHUB_ENV
-        echo IMAGE_TAG >> $GITHUB_ENV
+        #echo ECR_REGISTRY >> $GITHUB_ENV
+        #echo ECR_REPOSITORY >> $GITHUB_ENV
+        #echo IMAGE_TAG >> $GITHUB_ENV
         docker-compose up -d
         docker-compose push
