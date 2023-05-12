@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     image: "${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
-    environment:
-      - ECR_REGISTRY=${ECR_REGISTRY}
-      - ECR_REPOSITORY=${ECR_REPOSITORY}
-      - IMAGE_TAG=${IMAGE_TAG}
+    # environment:
+    #   - ECR_REGISTRY=${ECR_REGISTRY}
+    #   - ECR_REPOSITORY=${ECR_REPOSITORY}
+    #   - IMAGE_TAG=${IMAGE_TAG}
     ports:
       - "80-81:80"
