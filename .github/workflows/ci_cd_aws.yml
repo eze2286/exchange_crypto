@@ -8,7 +8,7 @@ on:
 jobs:
   biuld:
     name: Build image
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
      - name: Check out the repo
@@ -33,4 +33,3 @@ jobs:
        run: |
         docker-compose up -d
         docker-compose push
-
