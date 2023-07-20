@@ -35,3 +35,13 @@ jobs:
 
         docker-compose up -d
         docker-compose push
+     - name: Package Application
+       run: |
+        tar -czvf fastapi_app.tar.gz ./  # Empaqueta la carpeta 'app' que contiene tu aplicación FastAPI
+
+     - name: Publish Artifact
+       if: success()
+       uses: actions/upload-artifact@v2
+       with:
+        name: fastapi-artifact
+        path: fastapi_app.tar.gz
