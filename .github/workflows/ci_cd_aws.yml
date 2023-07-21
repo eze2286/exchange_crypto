@@ -35,13 +35,26 @@ jobs:
 
         docker-compose up -d
         docker-compose push
+        
+     - name: Create Temporary Directory
+       run: |
+        mkdir tmp_fastapi_app
+
+     - name: Copy Files to Temporary Directory
+       run: |
+        rsync -av --exclude=tmp_fastapi_app/ --exclude=.git/ ./ tmp_fastapi_app/
+        
      - name: Package Application
        run: |
-        tar -czvf fastapi_app.tar.gz ./  # Empaqueta la carpeta 'app' que contiene tu aplicación FastAPI
-
+        tar -czvf fastapi_app.tar.gz -C tmp_fastapi_app .
+        
      - name: Publish Artifact
        if: success()
-       uses: actions/upload-artifact@v2
+       uses: actions/upload-artifact@v3
        with:
         name: fastapi-artifact
         path: fastapi_app.tar.gz
+        
+     - name: Clean Up
+       run: |
+        rm -rf tmp_fastapi_app
