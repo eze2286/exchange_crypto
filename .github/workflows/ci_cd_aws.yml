@@ -36,6 +36,7 @@ jobs:
         docker-compose up -d
         docker-compose push
         
+# A partir de acá es para crear un artefacto en github dentro de la actions
      - name: Create Temporary Directory
        run: |
         mkdir tmp_fastapi_app
